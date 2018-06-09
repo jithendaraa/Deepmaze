@@ -72,9 +72,9 @@
                           mazegen();
                           obstaclecreate();
                           ctx.fillStyle = "yellow";
-                          
-                          ctx.arc(50,50,5,0,Math.PI*2,true);
-                          
+                          canvas.addEventListener("mousemove",setMousePosition,false);
+                          ctx.moveTo(mousex,mousey);
+                          ctx.arc(mousex,mousey,5,0,Math.PI*2,true);
                           ctx.fill();
 
                          
