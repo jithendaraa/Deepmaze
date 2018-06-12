@@ -85,7 +85,7 @@
 
                         	
                             
-                          	time += 1/60;
+                          	time += 1/fps;
                           	if (time%10 == 0)
                           {		
                           	v++;
@@ -124,10 +124,7 @@
   {                       
   	                      ctx.fillStyle = "black";
                           ctx.fillRect(0,0,700,500);
-                          ctx.fillStyle = "red";
-                          ctx.fillRect(posx,0,25,500);
-                          ctx.fillStyle = "black";
-                          ctx.fillRect(posx,sy,25,50);
+                          
                           if(sy+50 > 500 || sy < 0)
                           	vy =- vy;
                           sy += vy;
@@ -139,10 +136,7 @@
                           	}
                           	mx=Math.abs(mousex-posx);
 
-                          ctx.fillStyle = "red";
-                          ctx.fillRect(posx1,0,25,500);
-                          ctx.fillStyle = "black";
-                          ctx.fillRect(posx1,sy1,25,50);
+                          
                           if(sy1+50 > 500 || sy1 < 0)
                           	vy1 =- vy1;
                           sy1 += vy1;
@@ -154,13 +148,6 @@
                           }  
 
                           
-
-
-
-                          ctx.fillStyle = "red";
-                          ctx.fillRect(posx2,0,25,500);
-                          ctx.fillStyle = "black";
-                          ctx.fillRect(posx2,sy2,25,50);
                           if(sy2+50 > 500 || sy2 < 0)
                           	vy2 = -vy2;
                           sy2 += vy2;
@@ -171,13 +158,7 @@
                             vy2 = v*Math.random();
                           } 
                           
-
-                          
-
-                          ctx.fillStyle = "red";
-                          ctx.fillRect(posx3,0,25,500);
-                          ctx.fillStyle = "black";
-                          ctx.fillRect(posx3,sy3,25,50);
+                         
                           if(sy3+50 > 500 || sy3 < 0)
                           	vy3 = -vy3;
                           sy3 += vy3;
@@ -187,14 +168,7 @@
                           	posx3 = -25; 
                             vy3 = v*Math.random();
                           } 
-                          
-
-                         
-
-                          ctx.fillStyle = "red";
-                          ctx.fillRect(posx4,0,25,500);
-                          ctx.fillStyle = "black";
-                          ctx.fillRect(posx4,sy4,25,50);
+                                                   
                           if(sy4+50 > 500 || sy4 < 0)
                           	vy4 = -vy4;
                           sy4 += vy4;
@@ -204,14 +178,7 @@
                           	posx4 = -25; 
                             vy4 = v*Math.random();
                           } 
-                          
-
-
-
-                          ctx.fillStyle = "red";
-                          ctx.fillRect(posx5,0,25,500);
-                          ctx.fillStyle = "black";
-                          ctx.fillRect(posx5,sy5,25,50);
+                                                    
                           if(sy5+50 > 500 || sy5 < 0)
                           	vy5 = -vy5;
                           sy5 += vy5;
@@ -223,12 +190,6 @@
                           }
                           
 
-                          
-
-                          ctx.fillStyle="red";
-                          ctx.fillRect(posx6,0,25,500);
-                          ctx.fillStyle = "black";
-                          ctx.fillRect(posx6,sy6,25,50);
                           if(sy6+50 > 500 || sy6 < 0)
                           	vy6 = -vy6;
                           sy6 += vy6;
@@ -238,6 +199,39 @@
                           	posx6 = -25; 
                             vy6 = v*Math.random();
                           }
+
+                          var sprites=new Image();
+                          var wall=new Image();
+                          sprites.onload=function(){
+                          	ctx.drawImage(sprites,x1-5,y1-5,27.5,27.5);
+                          	ctx.drawImage(sprites,x2-5,y2-5,27.5,27.5);
+                          	ctx.drawImage(sprites,x3-5,y3-5,27.5,27.5);
+                          	ctx.drawImage(sprites,x4-5,y4-5,27.5,27.5);
+                          	ctx.drawImage(sprites,x5-5,y5-5,27.5,27.5);
+                          	ctx.drawImage(sprites,x6-5,y6-5,27.5,27.5);
+
+                          	ctx.drawImage(wall,posx,0,25,sy);
+                            ctx.drawImage(wall,posx1,0,25,sy1);
+                            ctx.drawImage(wall,posx2,0,25,sy2);
+                            ctx.drawImage(wall,posx3,0,25,sy3);
+                            ctx.drawImage(wall,posx4,0,25,sy4);
+                            ctx.drawImage(wall,posx5,0,25,sy5);
+                            ctx.drawImage(wall,posx6,0,25,sy6);
+
+                            ctx.drawImage(wall,posx,sy+50,25,450-sy);
+                            ctx.drawImage(wall,posx1,sy1+50,25,450-sy1);
+                            ctx.drawImage(wall,posx2,sy2+50,25,450-sy2);
+                            ctx.drawImage(wall,posx3,sy3+50,25,450-sy3);
+                            ctx.drawImage(wall,posx4,sy4+50,25,450-sy4);
+                            ctx.drawImage(wall,posx5,sy5+50,25,450-sy5);
+                            ctx.drawImage(wall,posx6,sy6+50,25,450-sy6);
+
+
+
+                          }
+
+                          sprites.src="UFO.png";
+                          wall.src="wall.png";
 
 
                             mazeHitTest();
@@ -442,22 +436,22 @@
 
   function obstaclecreate()
   {
-  	ctx.fillStyle="blue";
+  	ctx.fillStyle="black";
   	obstacle1();
   	bullet1();
-  	ctx.fillStyle="blue";
+  	ctx.fillStyle="black";
   	obstacle2();
   	bullet2();
-  	ctx.fillStyle="blue";
+  	ctx.fillStyle="black";
   	obstacle3();
   	bullet3();
-  	ctx.fillStyle="blue";
+  	ctx.fillStyle="black";
   	obstacle4();
   	bullet4();
-  	ctx.fillStyle="blue";
+  	ctx.fillStyle="black";
   	obstacle5();
   	bullet5();
-  	ctx.fillStyle="blue";
+  	ctx.fillStyle="black";
   	obstacle6();
   	bullet6();
   	obstacleHitTest();
