@@ -96,9 +96,7 @@
 
                           score=Math.floor(lvlspeed*time);
                           document.getElementById("score").innerHTML=score;
-                          ctx.fillStyle="white";
-                          ctx.font="30px Arial";
-                          ctx.fillText("Score",10,10);
+                          
 
                           
                           ctx.canvas.addEventListener("mousemove",deep,false);
@@ -124,6 +122,7 @@
   {                       
   	                      ctx.fillStyle = "black";
                           ctx.fillRect(0,0,700,500);
+                          
                           
                           if(sy+50 > 500 || sy < 0)
                           	vy =- vy;
@@ -233,6 +232,10 @@
                           sprites.src="UFO.png";
                           wall.src="wall.png";
 
+                          ctx.fillStyle="white";
+                          ctx.font="30px Arial";
+                          ctx.fillText("Score:"+score,10,30);
+
 
                             mazeHitTest();
 }
@@ -244,36 +247,42 @@
    {
    	alert("Gameover.Your score is:"+score);
     lvlspeed=0;
+    clearInterval(tloop);
    }
 
    if(mousex>=x2-5 && mousex<=x2+30 && mousey>=y2-5 && mousey<=y2+30)
    {
    	alert("Gameover.Your score is:"+score);
     lvlspeed=0;
+    clearInterval(tloop);
    }
 
    if(mousex>=x3-5 && mousex<=x3+30 && mousey>=y3-5 && mousey<=y3+30)
    {
    	alert("Gameover.Your score is:"+score);
     lvlspeed=0;
+    clearInterval(tloop);
    }
 
    if(mousex>=x4-5 && mousex<=x4+30 && mousey>=y4-5 && mousey<=y4+30)
    {
    	alert("Gameover.Your score is:"+score);
     lvlspeed=0;
+    clearInterval(tloop);
    }
 
    if(mousex>=x5-5 && mousex<=x5+30 && mousey>=y5-5 && mousey<=y5+30)
    {
    	alert("Gameover.Your score is:"+score);
     lvlspeed=0;
+    clearInterval(tloop);
    }
 
    if(mousex>=x6-5 && mousex<=x6+30 && mousey>=y6-5 && mousey<=y6+30)
    {
    	alert("Gameover.Your score is:"+score);
     lvlspeed=0;
+    clearInterval(tloop);
    }
  }
 
@@ -299,6 +308,7 @@
     {
     	alert("Gameover.Your score is:"+score);
         lvlspeed=0;
+        clearInterval(tloop);
     }
  
  }
@@ -325,6 +335,7 @@
     {
     	alert("Gameover.Your score is:"+score);
         lvlspeed=0;
+        clearInterval(tloop);
     }
  
  }
@@ -351,6 +362,7 @@
     {
     	alert("Gameover.Your score is:"+score);
         lvlspeed=0;
+        clearInterval(tloop);
     }
  
  }
@@ -377,6 +389,7 @@
     {
     	alert("Gameover.Your score is:"+score);
         lvlspeed=0;
+        clearInterval(tloop);
     }
  
  }
@@ -403,6 +416,7 @@
     {
     	alert("Gameover.Your score is:"+score);
         lvlspeed=0;
+        clearInterval(tloop);
     }
  
  }
@@ -430,6 +444,7 @@
     {
     	alert("Gameover.Your score is:"+score);
         lvlspeed=0;
+        clearInterval(tloop);
     }
  
  }
@@ -569,6 +584,7 @@ function deep(e)
   {
    alert("Gameover.Your score is:"+score);
     lvlspeed=0;
+    clearInterval(tloop);
   }
  }
 
@@ -578,6 +594,7 @@ function deep(e)
   {
     alert("Gameover.Your score is:"+score);
     lvlspeed=0;
+    clearInterval(tloop);
   }
  }
 
@@ -587,6 +604,7 @@ function deep(e)
   {
     alert("Gameover.Your score is:"+score);
     lvlspeed=0;
+    clearInterval(tloop);
   }
 
  }
@@ -596,6 +614,7 @@ function deep(e)
   {
     alert("Gameover.Your score is:"+score);
     lvlspeed=0;
+    clearInterval(tloop);
   }
  }
 
@@ -605,6 +624,7 @@ function deep(e)
   {
     alert("Gameover.Your score is:"+score);
     lvlspeed=0;
+    clearInterval(tloop);
   }
  }
 
@@ -614,6 +634,7 @@ function deep(e)
   {
     alert("Gameover.Your score is:"+score);
     lvlspeed=0;
+    clearInterval(tloop);
   }
 
  }
@@ -625,6 +646,7 @@ function deep(e)
   {
     alert("Gameover.Your score is:"+score);
     lvlspeed=0;
+    clearInterval(tloop);
   }
  }
 
@@ -634,6 +656,7 @@ function deep(e)
   {
     alert("Gameover.Your score is:"+score);
     lvlspeed=0;
+    clearInterval(tloop);
   }
  }
 
@@ -643,6 +666,7 @@ function deep(e)
   {
     alert("Gameover.Your score is:"+score);
     lvlspeed=0;
+    clearInterval(tloop);
   }
 
  }
@@ -653,6 +677,7 @@ function deep(e)
   {
     alert("Gameover.Your score is:"+score);
     lvlspeed=0;
+    clearInterval(tloop);
   }
  }
 
@@ -662,6 +687,7 @@ function deep(e)
   {
     alert("Gameover.Your score is:"+score);
     lvlspeed=0;
+    clearInterval(tloop);
   }
  }
 
@@ -671,6 +697,7 @@ function deep(e)
   {
     alert("Gameover.Your score is:"+score);
     lvlspeed=0;
+    clearInterval(tloop);
   }
 
  }
@@ -681,6 +708,7 @@ function deep(e)
   {
     alert("Gameover.Your score is:"+score);
     lvlspeed=0;
+    clearInterval(tloop);
   }
  }
 
@@ -690,6 +718,7 @@ function deep(e)
   {
     alert("Gameover.Your score is:"+score);
     lvlspeed=0;
+    clearInterval(tloop);
   }
  }
 
@@ -699,6 +728,7 @@ function deep(e)
   {
     alert("Gameover.Your score is:"+score);
     lvlspeed=0;
+    clearInterval(tloop);
   }
 
  }
@@ -709,6 +739,7 @@ function deep(e)
   {
     alert("Gameover.Your score is:"+score);
     lvlspeed=0;
+    clearInterval(tloop);
   }
  }
 
@@ -718,6 +749,7 @@ function deep(e)
   {
     alert("Gameover.Your score is:"+score);
     lvlspeed=0;
+    clearInterval(tloop);
   }
  }
 
@@ -727,6 +759,7 @@ function deep(e)
   {
     alert("Gameover.Your score is:"+score);
     lvlspeed=0;
+    clearInterval(tloop);
   }
 
  }
@@ -738,6 +771,7 @@ function deep(e)
   {
     alert("Gameover.Your score is:"+score);
     lvlspeed=0;
+    clearInterval(tloop);
   }
  }
 
@@ -747,6 +781,7 @@ function deep(e)
   {
     alert("Gameover.Your score is:"+score);
     lvlspeed=0;
+    clearInterval(tloop);
   }
  }
 
@@ -756,6 +791,7 @@ function deep(e)
   {
     alert("Gameover.Your score is:"+score);
     lvlspeed=0;
+    clearInterval(tloop);
   }
 
  }
