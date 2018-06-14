@@ -1,26 +1,28 @@
 <!DOCTYPE html>
 <html>
+<title>MAZING</title>
 <head>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<style type="text/css">
-		
+	<style>
+	.maze{
+		text-align: center;
+	}
+
+    body{
+    	background-color: black;
+    }
+	
 	</style>
-	<h1>AMAZER</h1>
-	<title>MAZING</title>
 </head>
-<div class="maze">
-<canvas id="canvas" width="700" height="500" style="background-color: black" ></canvas>
-</div>
-<button class="btn btn-primary" onclick="location.reload()">Restart</button>
-
-
-<script type="text/javascript" src="maze.js"></script>
-
 <body>
+	<div class="maze">
+<canvas id="canvas" width="700"  height="500" style="border: 1px solid white;" ></canvas>
+</div>
+
+	<script type="text/javascript" src="maze.js"></script>
+	
 	
 	<p id="score">0</p>
-
-
-
+	<p id="demo1">0</p>
 </body>
 </html>

@@ -1,799 +1,417 @@
-  var canvas=document.getElementById("canvas");
-  var ctx=canvas.getContext('2d'); 
- 
+//Variables
 
-  var v=2; 
+  var canvas = document.getElementById("canvas");
+  var ctx = canvas.getContext('2d'); 
+  var v = 2; 
   
-  var vy=v*Math.random();
-  var vy1=v*Math.random();
-  var vy2=v*Math.random();
-  var vy3=v*Math.random();
-  var vy4=v*Math.random();
-  var vy5=v*Math.random();
-  var vy6=v*Math.random();
+  var vy = v*Math.random();
+  var vy1 = v*Math.random();
+  var vy2 = v*Math.random();
+  var vy3 = v*Math.random();
+  var vy4 = v*Math.random();
+  var vy5 = v*Math.random();
+  var vy6 = v*Math.random();
+
+  var lvlspeed = 1;
+
+  var y1 = 475*Math.random();
+  var y2 = 475*Math.random();
+  var y3 = 475*Math.random();
+  var y4 = 475*Math.random();
+  var y5 = 475*Math.random();
+  var y6 = 475*Math.random();
+
+  var wlopp;
+  var score = 0;
+  var fps = 60;
+  var time = 0; 
+  var mousex = 550,mousey = 250;
+  var bs = 1;
 
 
-  var sy=56;
-  var sy1=60;
-  var sy2=250;
-  var sy3=65;
-  var sy4=70;
-  var sy5=436;
-  var sy6=287;
-  var z=0;
+//Functions to draw Deep
 
-  var posx=160;
-  var posx1=posx-120;
-  var posx2=posx1-120;
-  var posx3=posx2-120;
-  var posx4=posx3-90;
-  var posx5=posx4-100;
-  var posx6=posx5-110;
-  var lvlspeed=1;
+  ctx.canvas.addEventListener("mousemove",deep,false);
+  function deep(e)
+  {
+  	 mousex=e.clientX-ctx.canvas.offsetLeft;
+     mousey=e.clientY-ctx.canvas.offsetTop;
+  }
+  function drawDeep()
+  {
+  	ctx.fillStyle="yellow";
+  	ctx.beginPath();
+  	ctx.moveTo(mousex,mousey);
+  	ctx.arc(mousex,mousey,5,0,Math.PI*2,true);
+  	ctx.fill();
+  	ctx.closePath();
+  }
 
-  var y1=475*Math.random();
-  var y2=475*Math.random();
-  var y3=475*Math.random();
-  var y4=475*Math.random();
-  var y5=475*Math.random();
-  var y6=475*Math.random();
+//Hit Tests(for walls,obsatcles and bullets)
 
-  var x1=posx1+60;
-  var x2=posx2+60;
-  var x3=posx3+60;
-  var x4=posx4+45;
-  var x5=posx5+50;
-  var x6=posx6+55;
-
-  var score=0;
-
-
-  var fps=60;
-  var time=0;
-
-  var bx1,bx2,bx3,bx4,bx5,bx6;
-  var by1,by2,by3,by4,by5,by6;  
-
-
-  var mousex=550,mousey=250;
-
-  var bs=1;
-
-    bx1=x1+12.5;
-    by1=y1-10;
-
-    bx2=x2+12.5;
-    by2=y2-10;
-
-    bx3=x3+12.5;
-    by3=y3-10;
-
-    bx4=x4+12.5;
-    by4=y4-10;
-
-    bx5=x5+12.5;
-    by5=y5-10;
-
-    bx6=x6+12.5;
-    by6=y6-10;
-
-
-
-
-  var tloop=setInterval(function()
-                        {
-
-                        	
-                            
-                          	time += 1/fps;
-                          	if (time%10 == 0)
-                          {		
-                          	v++;
-                          	lvlspeed+=0.5;
-                          	bs++;
-                          	
-                          }
-
-                          score=Math.floor(lvlspeed*time);
-                          document.getElementById("score").innerHTML=score;
-                          
-
-                          
-                          ctx.canvas.addEventListener("mousemove",deep,false);
-                          
-                          
-                          mazegen();
-                          obstaclecreate();
-                          ctx.beginPath();
-                          ctx.fillStyle="yellow";
-                          ctx.arc(mousex,mousey,5,0,Math.PI*2,true);
-                          ctx.fill();
-                          ctx.closePath();
-
-                          
-                         
-               
-
-
-                      },1000/fps); 
-
-
-  function mazegen()
-  {                       
-  	                      ctx.fillStyle = "black";
-                          ctx.fillRect(0,0,700,500);
-                          
-                          
-                          if(sy+50 > 500 || sy < 0)
-                          	vy =- vy;
-                          sy += vy;
-                          posx += lvlspeed;
-                          if(posx > 700)
-                          	{
-                          		posx = -25;
-                          		vy = v*Math.random();
-                          	}
-                          	mx=Math.abs(mousex-posx);
-
-                          
-                          if(sy1+50 > 500 || sy1 < 0)
-                          	vy1 =- vy1;
-                          sy1 += vy1;
-                          posx1 += lvlspeed;
-                          if(posx1 > 700)
-                          {
-                          	posx1 = -25;                          
-                            vy1 = v*Math.random();
-                          }  
-
-                          
-                          if(sy2+50 > 500 || sy2 < 0)
-                          	vy2 = -vy2;
-                          sy2 += vy2;
-                          posx2 += lvlspeed;
-                          if(posx2 > 700)
-                          {
-                          	posx2 = -25; 
-                            vy2 = v*Math.random();
-                          } 
-                          
-                         
-                          if(sy3+50 > 500 || sy3 < 0)
-                          	vy3 = -vy3;
-                          sy3 += vy3;
-                          posx3 += lvlspeed;
-                          if(posx3 > 700)
-                          {
-                          	posx3 = -25; 
-                            vy3 = v*Math.random();
-                          } 
-                                                   
-                          if(sy4+50 > 500 || sy4 < 0)
-                          	vy4 = -vy4;
-                          sy4 += vy4;
-                          posx4 += lvlspeed;
-                          if(posx4 > 700)
-                          {
-                          	posx4 = -25; 
-                            vy4 = v*Math.random();
-                          } 
-                                                    
-                          if(sy5+50 > 500 || sy5 < 0)
-                          	vy5 = -vy5;
-                          sy5 += vy5;
-                          posx5 += lvlspeed;
-                          if(posx5 > 700)
-                          {
-                          	posx5 = -25; 
-                            vy5 = v*Math.random();
-                          }
-                          
-
-                          if(sy6+50 > 500 || sy6 < 0)
-                          	vy6 = -vy6;
-                          sy6 += vy6;
-                          posx6 += lvlspeed;
-                          if(posx6 > 700)
-                          {
-                          	posx6 = -25; 
-                            vy6 = v*Math.random();
-                          }
-
-                          var sprites=new Image();
-                          var wall=new Image();
-                          sprites.onload=function(){
-                          	ctx.drawImage(sprites,x1-5,y1-5,27.5,27.5);
-                          	ctx.drawImage(sprites,x2-5,y2-5,27.5,27.5);
-                          	ctx.drawImage(sprites,x3-5,y3-5,27.5,27.5);
-                          	ctx.drawImage(sprites,x4-5,y4-5,27.5,27.5);
-                          	ctx.drawImage(sprites,x5-5,y5-5,27.5,27.5);
-                          	ctx.drawImage(sprites,x6-5,y6-5,27.5,27.5);
-
-                          	ctx.drawImage(wall,posx,0,25,sy);
-                            ctx.drawImage(wall,posx1,0,25,sy1);
-                            ctx.drawImage(wall,posx2,0,25,sy2);
-                            ctx.drawImage(wall,posx3,0,25,sy3);
-                            ctx.drawImage(wall,posx4,0,25,sy4);
-                            ctx.drawImage(wall,posx5,0,25,sy5);
-                            ctx.drawImage(wall,posx6,0,25,sy6);
-
-                            ctx.drawImage(wall,posx,sy+50,25,450-sy);
-                            ctx.drawImage(wall,posx1,sy1+50,25,450-sy1);
-                            ctx.drawImage(wall,posx2,sy2+50,25,450-sy2);
-                            ctx.drawImage(wall,posx3,sy3+50,25,450-sy3);
-                            ctx.drawImage(wall,posx4,sy4+50,25,450-sy4);
-                            ctx.drawImage(wall,posx5,sy5+50,25,450-sy5);
-                            ctx.drawImage(wall,posx6,sy6+50,25,450-sy6);
+   function mazeHitTest()
+ {
+ 	
+if(mousey>wall1.sy+45)
+ {
+  if(mousex>wall1.posx && mousex-wall1.posx<30)
+    gameover();
+ }
+ if(mousey<wall1.sy+5)
+ {
+   if(mousex>wall1.posx && mousex-wall1.posx<30)
+   gameover();
+ }
+ if(wall1.posx-mousex<5 && wall1.posx-mousex>=0)
+ {
+   if( mousey>wall1.sy+45 || mousey<wall1.sy+5)
+    gameover();
+ }
+ 
+if(mousey>wall2.sy+45)
+ {
+  if(mousex>wall2.posx && mousex-wall2.posx<30)
+    gameover();
+ }
+ if(mousey<wall2.sy+5)
+ {
+   if(mousex>wall2.posx && mousex-wall2.posx<30)
+   gameover();
+ }
+ if(wall2.posx-mousex<5 && wall2.posx-mousex>=0)
+ {
+   if( mousey>wall2.sy+45 || mousey<wall2.sy+5)
+    gameover();
+ }
+if(mousey>wall3.sy+45)
+ {
+  if(mousex>wall3.posx && mousex-wall3.posx<30)
+    gameover();
+ }
+ if(mousey<wall3.sy+5)
+ {
+   if(mousex>wall3.posx && mousex-wall3.posx<30)
+   gameover();
+ }
+ if(wall3.posx-mousex<5 && wall3.posx-mousex>=0)
+ {
+   if( mousey>wall3.sy+45 || mousey<wall3.sy+5)
+    gameover();
+ }
+if(mousey>wall4.sy+45)
+ {
+  if(mousex>wall4.posx && mousex-wall4.posx<30)
+    gameover();
+ }
+ if(mousey<wall4.sy+5)
+ {
+   if(mousex>wall4.posx && mousex-wall4.posx<30)
+   gameover();
+ }
+ if(wall4.posx-mousex<5 && wall4.posx-mousex>=0)
+ {
+   if( mousey>wall4.sy+45 || mousey<wall4.sy+5)
+    gameover();
+ }
+ if(mousey>wall5.sy+45)
+ {
+  if(mousex>wall5.posx && mousex-wall5.posx<30)
+    gameover();
+ }
+ if(mousey<wall5.sy+5)
+ {
+   if(mousex>wall5.posx && mousex-wall5.posx<30)
+   gameover();
+ }
+ if(wall5.posx-mousex<5 && wall5.posx-mousex>=0)
+ {
+   if( mousey>wall5.sy+45 || mousey<wall5.sy+5)
+    gameover();
+ }
+ if(mousey>wall6.sy+45)
+ {
+  if(mousex>wall6.posx && mousex-wall6.posx<30)
+    gameover();
+ }
+ if(mousey<wall6.sy+5)
+ {
+   if(mousex>wall6.posx && mousex-wall6.posx<30)
+   gameover();
+ }
+ if(wall6.posx-mousex<5 && wall6.posx-mousex>=0)
+ {
+   if( mousey>wall6.sy+45 || mousey<wall6.sy+5)
+    gameover();
+ }
+ if(mousey>wall7.sy+45)
+ {
+  if(mousex>wall7.posx && mousex-wall7.posx<30)
+    gameover();
+ }
+ if(mousey<wall7.sy+5)
+ {
+   if(mousex>wall7.posx && mousex-wall7.posx<30)
+   gameover();
+ }
+ if(wall7.posx-mousex<5 && wall7.posx-mousex>=0)
+ {
+   if( mousey>wall7.sy+45 || mousey<wall7.sy+5)
+    gameover();
+ }
+ 
+ }
 
 
+  function obstacleHitTest()
+ {
+   if(mousex>=obstacle1.x-5 && mousex<=obstacle1.x+30 && mousey>=obstacle1.y-5 && mousey<=obstacle1.y+30)
+   gameover();
 
-                          }
+   if(mousex>=obstacle2.x-5 && mousex<=obstacle2.x+30 && mousey>=obstacle2.y-5 && mousey<=obstacle2.y+30)
+   gameover();
 
-                          sprites.src="UFO.png";
-                          wall.src="wall.png";
+   if(mousex>=obstacle3.x-5 && mousex<=obstacle3.x+30 && mousey>=obstacle3.y-5 && mousey<=obstacle3.y+30)
+   gameover();
 
-                          ctx.fillStyle="white";
-                          ctx.font="30px Arial";
-                          ctx.fillText("Score:"+score,10,30);
+   if(mousex>=obstacle4.x-5 && mousex<=obstacle4.x+30 && mousey>=obstacle4.y-5 && mousey<=obstacle4.y+30)
+   gameover();
+
+   if(mousex>=obstacle5.x-5 && mousex<=obstacle5.x+30 && mousey>=obstacle5.y-5 && mousey<=obstacle5.y+30)
+   gameover();
+
+   if(mousex>=obstacle6.x-5 && mousex<=obstacle6.x+30 && mousey>=obstacle6.y-5 && mousey<=obstacle6.y+30)
+   gameover();
+ }
+
+//Objects(walls,obstacles and bullets)
+
+    function Wall(posx,sy,vy)
+    {
+    	this.posx = posx;
+    	this.sy = sy;
+    	this.vy = vy;
+    	this.update = function(){
+    		ctx.fillStyle = "black";
+    		ctx.fillRect(0,0,700,500);
+    		if(this.sy+50 > 500 || this.sy < 0)
+            this.vy =- this.vy;
+            this.sy += this.vy;
+            this.posx += lvlspeed;
+            if(this.posx > 700)
+            	{
+           		  this.posx = -25;
+           		  this.vy = v*Math.random();
+            	}   		
+    	}
+    }
+    
+    function Obstacle(x,y){
+    	this.x = x; 
+    	this.y = y;
+    	this.update = function()
+    	{
+    		this.x += lvlspeed;
+    		if(this.x > 700)
+    			this.x = -25;
+    	}
+    }
+
+    function Bullet(bx,by){
+    	this.bx = bx;
+    	this.by = by;
+    	this.update = function(){
+    		this.bx += lvlspeed;
+    		if(this.bx > 712.5)
+    			this.bx = -12.5;
+    		this.by -= bs;
+    		if(this.by < -10)
+    			this.by = by;
+            var dx = Math.abs(mousex-this.bx);
+            var dy = Math.abs(mousey-this.by);
+            var d = Math.sqrt(Math.pow(dx,2)+Math.pow(dy,2));
+
+            if(d<=15)
+            	gameover();
+    	}
+    }
+
+//Implementation of Objects-Initialising
+
+function initWall()
+{
+  wall1 = new Wall(160,56,vy);
+  wall2 = new Wall(40,60,vy1);
+  wall3 = new Wall(-80,250,vy2);
+  wall4 = new Wall(-200,65,vy3);
+  wall5 = new Wall(-290,70,vy4);
+  wall6 = new Wall(-390,436,vy5);
+  wall7 = new Wall(-500,287,vy6); 
+}
+function initObstacle()
+{
+  obstacle1 = new Obstacle(100,y1);
+  obstacle2 = new Obstacle(-20,y2);
+  obstacle3 = new Obstacle(-140,y3);
+  obstacle4 = new Obstacle(-245,y4);
+  obstacle5 = new Obstacle(-340,y5);
+  obstacle6 = new Obstacle(-445,y6); 
+}
+function initBullet()
+{
+  bullet1 = new Bullet(112.5,y1-10);
+  bullet2 = new Bullet(-7.5,y2-10);
+  bullet3 = new Bullet(-127.5,y3-10);
+  bullet4 = new Bullet(-232.5,y4-10);    	
+  bullet5 = new Bullet(-327.5,y5-10);
+  bullet6 = new Bullet(-432.5,y6-10);
+}
+
+//Implementation of Objects-Animating and setup
+function setup()
+{	
+	wloop=setInterval(function(){
+
+		animate();
+		wall1.update();
+		obstacle1.update();
+		wall2.update();
+		obstacle2.update();
+		wall3.update();
+		obstacle3.update();
+		wall4.update();
+		obstacle4.update();
+		wall5.update();
+		obstacle5.update();
+		wall6.update();
+		obstacle6.update();
+		wall7.update();
+		bullet1.update();
+		bullet2.update();
+		bullet3.update();
+		bullet4.update();
+		bullet5.update();
+		bullet6.update();
+		
+		time += 1/fps;
+		score=Math.floor(lvlspeed*time);
+		if(time%10 == 0)
+		{
+			v += 1;
+			lvlspeed += 1;
+			bs += 1;
+			;
+		}	
+        ctx.fillStyle="white";
+		ctx.font = "30px Arial";
+        ctx.fillText("Score:"+score,10,25);
 
 
-                            mazeHitTest();
+	},1000/fps);
 }
 
 
- function obstacleHitTest()
- {
-   if(mousex>=x1-5 && mousex<=x1+30 && mousey>=y1-5 && mousey<=y1+30)
-   {
-   	alert("Gameover.Your score is:"+score);
-    lvlspeed=0;
-    clearInterval(tloop);
-   }
-
-   if(mousex>=x2-5 && mousex<=x2+30 && mousey>=y2-5 && mousey<=y2+30)
-   {
-   	alert("Gameover.Your score is:"+score);
-    lvlspeed=0;
-    clearInterval(tloop);
-   }
-
-   if(mousex>=x3-5 && mousex<=x3+30 && mousey>=y3-5 && mousey<=y3+30)
-   {
-   	alert("Gameover.Your score is:"+score);
-    lvlspeed=0;
-    clearInterval(tloop);
-   }
-
-   if(mousex>=x4-5 && mousex<=x4+30 && mousey>=y4-5 && mousey<=y4+30)
-   {
-   	alert("Gameover.Your score is:"+score);
-    lvlspeed=0;
-    clearInterval(tloop);
-   }
-
-   if(mousex>=x5-5 && mousex<=x5+30 && mousey>=y5-5 && mousey<=y5+30)
-   {
-   	alert("Gameover.Your score is:"+score);
-    lvlspeed=0;
-    clearInterval(tloop);
-   }
-
-   if(mousex>=x6-5 && mousex<=x6+30 && mousey>=y6-5 && mousey<=y6+30)
-   {
-   	alert("Gameover.Your score is:"+score);
-    lvlspeed=0;
-    clearInterval(tloop);
-   }
- }
-
- function bullet1()
- {
-
- 	ctx.fillStyle="gray";
-    ctx.beginPath(); 
-
-    ctx.moveTo(bx1,by1);
-    ctx.arc(bx1,by1,10,0,Math.PI*2,true);
-    ctx.fill();
-    ctx.closePath();
-    bx1+=lvlspeed;
-    by1-=bs;
-    if(by1<-10)
-    	by1=y1-10;
-
-    var dx1=Math.abs(mousex-bx1);
-    var dy1=Math.abs(mousey-by1);
-    var d=Math.sqrt(Math.pow(dx1,2)+Math.pow(dy1,2));
-    if(d<=15)
-    {
-    	alert("Gameover.Your score is:"+score);
-        lvlspeed=0;
-        clearInterval(tloop);
-    }
- 
- }
-
- function bullet2()
- {
-
- 	ctx.fillStyle="gray";
-    ctx.beginPath(); 
-
-    ctx.moveTo(bx2,by2);
-    ctx.arc(bx2,by2,10,0,Math.PI*2,true);
-    ctx.fill();
-    ctx.closePath();
-    bx2+=lvlspeed;
-    by2-=bs;
-    if(by2<-10)
-    	by2=y2-10;
-
-    var dx2=Math.abs(mousex-bx2);
-    var dy2=Math.abs(mousey-by2);
-    var d=Math.sqrt(Math.pow(dx2,2)+Math.pow(dy2,2));
-    if(d<=15)
-    {
-    	alert("Gameover.Your score is:"+score);
-        lvlspeed=0;
-        clearInterval(tloop);
-    }
- 
- }
-
-  function bullet3()
- {
-
- 	ctx.fillStyle="gray";
-    ctx.beginPath(); 
-
-    ctx.moveTo(bx3,by3);
-    ctx.arc(bx3,by3,10,0,Math.PI*2,true);
-    ctx.fill();
-    ctx.closePath();
-    bx3+=lvlspeed;
-    by3-=bs;
-    if(by3<-10)
-    	by3=y3-10;
-
-    var dx3=Math.abs(mousex-bx3);
-    var dy3=Math.abs(mousey-by3);
-    var d=Math.sqrt(Math.pow(dx3,2)+Math.pow(dy3,2));
-    if(d<=15)
-    {
-    	alert("Gameover.Your score is:"+score);
-        lvlspeed=0;
-        clearInterval(tloop);
-    }
- 
- }
-
-   function bullet4()
- {
-
- 	ctx.fillStyle="gray";
-    ctx.beginPath(); 
-
-    ctx.moveTo(bx4,by4);
-    ctx.arc(bx4,by4,10,0,Math.PI*2,true);
-    ctx.fill();
-    ctx.closePath();
-    bx4+=lvlspeed;
-    by4-=bs;
-    if(by4<-10)
-    	by4=y4-10;
-
-    var dx4=Math.abs(mousex-bx4);
-    var dy4=Math.abs(mousey-by4);
-    var d=Math.sqrt(Math.pow(dx4,2)+Math.pow(dy4,2));
-    if(d<=15)
-    {
-    	alert("Gameover.Your score is:"+score);
-        lvlspeed=0;
-        clearInterval(tloop);
-    }
- 
- }
-
-   function bullet5()
- {
-
- 	ctx.fillStyle="gray";
-    ctx.beginPath(); 
-
-    ctx.moveTo(bx5,by5);
-    ctx.arc(bx5,by5,10,0,Math.PI*2,true);
-    ctx.fill();
-    ctx.closePath();
-    bx5+=lvlspeed;
-    by5-=bs;
-    if(by5<-10)
-    	by5=y5-10;
-
-    var dx5=Math.abs(mousex-bx5);
-    var dy5=Math.abs(mousey-by5);
-    var d=Math.sqrt(Math.pow(dx5,2)+Math.pow(dy5,2));
-    if(d<=15)
-    {
-    	alert("Gameover.Your score is:"+score);
-        lvlspeed=0;
-        clearInterval(tloop);
-    }
- 
- }
-
-
-  function bullet6()
- {
-
- 	ctx.fillStyle="gray";
-    ctx.beginPath(); 
-
-    ctx.moveTo(bx6,by6);
-    ctx.arc(bx6,by6,10,0,Math.PI*2,true);
-    ctx.fill();
-    ctx.closePath();
-    bx6+=lvlspeed;
-    by6-=bs;
-    if(by6<-10)
-    	by6=y6-10;
-
-    var dx6=Math.abs(mousex-bx6);
-    var dy6=Math.abs(mousey-by6);
-    var d=Math.sqrt(Math.pow(dx6,2)+Math.pow(dy6,2));
-    if(d<=15)
-    {
-    	alert("Gameover.Your score is:"+score);
-        lvlspeed=0;
-        clearInterval(tloop);
-    }
- 
- }
-
-  function obstaclecreate()
-  {
-  	ctx.fillStyle="black";
-  	obstacle1();
-  	bullet1();
-  	ctx.fillStyle="black";
-  	obstacle2();
-  	bullet2();
-  	ctx.fillStyle="black";
-  	obstacle3();
-  	bullet3();
-  	ctx.fillStyle="black";
-  	obstacle4();
-  	bullet4();
-  	ctx.fillStyle="black";
-  	obstacle5();
-  	bullet5();
-  	ctx.fillStyle="black";
-  	obstacle6();
-  	bullet6();
-  	obstacleHitTest();
-  }
-
-  
-
-function obstacle1()
-  {
-  	if(x1 > 700)
-  		{
-  			x1 = -25;
-  			y1 = 475*Math.random();
-  			bx1=x1+12.5;
-  			by1=y1-10;
-  		}	
-    ctx.fillRect(x1,y1,25,25);
-    x1 += lvlspeed;
-  }
-
-  
-
-function obstacle2()
-  {
-  	if(x2 > 700)
-  	{
-  		x2 = -25;
-  		y2 = 475*Math.random();
-  		bx2=x2+12.5;
-  		by2=y2-10;
-  	}
-  	ctx.fillRect(x2,y2,25,25);
-  	x2 += lvlspeed;
-  }
-
-  
-
-function obstacle3()
-  {
-  	if(x3 > 700)
-  	{
-  		x3 = -25;
-  		y3 = 475*Math.random();
-  		bx3=x3+12.5;
-  		by3=y3-10;
-  	}
-  	ctx.fillRect(x3,y3,25,25);
-  	x3 += lvlspeed;
-  }
-
-  
-
-function obstacle4()
-  {
-  	if(x4 > 700)
-  	{
-  		x4 = -25;
-  		y4 = 475*Math.random();
-  		bx4=x4+12.5;
-  		by4=y4-10;
-  	}
-  	ctx.fillRect(x4,y4,25,25);
-  	x4 += lvlspeed;
-  }
-
-
-
-function obstacle5()
-  {
-  	if(x5 > 700)
-  	{
-  		x5 = -25;
-  		y5 = 475*Math.random();
-  		bx5=x5+12.5;
-  		by5=y5-10;
-  	}
-  	ctx.fillRect(x5,y5,25,25);
-  	x5 += lvlspeed;
-  }
-
-
-
-function obstacle6()
-  {
-  	if(x6 > 700)
-  	{
-  	    x6 = -25;
-  	    y6 = 475*Math.random();
-  	    bx6=x6+12.5;
-  		by6=y6-10;
-  	}
-  	ctx.fillRect(x6,y6,25,25);
-  	x6 += lvlspeed;
-  }
-
-
-
-
-
-function deep(e) 
+function animate()
 {
-     mousex=e.clientX-ctx.canvas.offsetLeft;
-     mousey=e.clientY-9;
- }
+	   var wall=new Image();
+	   var sprites=new Image();
+            wall.onload=function()
+            {
+                
+            	ctx.drawImage(wall,wall1.posx,0,25,wall1.sy);
+                ctx.drawImage(wall,wall1.posx,wall1.sy+50,25,450-wall1.sy);
+
+                ctx.drawImage(wall,wall2.posx,0,25,wall2.sy);
+                ctx.drawImage(wall,wall2.posx,wall2.sy+50,25,450-wall2.sy);
+
+                ctx.drawImage(wall,wall3.posx,0,25,wall3.sy);
+                ctx.drawImage(wall,wall3.posx,wall3.sy+50,25,450-wall3.sy);
+
+                ctx.drawImage(wall,wall4.posx,0,25,wall4.sy);
+                ctx.drawImage(wall,wall4.posx,wall4.sy+50,25,450-wall4.sy);
+
+                ctx.drawImage(wall,wall5.posx,0,25,wall5.sy);
+                ctx.drawImage(wall,wall5.posx,wall5.sy+50,25,450-wall5.sy);
+
+                ctx.drawImage(wall,wall6.posx,0,25,wall6.sy);
+                ctx.drawImage(wall,wall6.posx,wall6.sy+50,25,450-wall6.sy);
+
+                ctx.drawImage(wall,wall7.posx,0,25,wall7.sy);
+                ctx.drawImage(wall,wall7.posx,wall7.sy+50,25,450-wall7.sy); 
+
+                ctx.drawImage(sprites,obstacle1.x,obstacle1.y,25,25);
+                ctx.drawImage(sprites,obstacle2.x,obstacle2.y,25,25);
+                ctx.drawImage(sprites,obstacle3.x,obstacle3.y,25,25);
+                ctx.drawImage(sprites,obstacle4.x,obstacle4.y,25,25);
+                ctx.drawImage(sprites,obstacle5.x,obstacle5.y,25,25);
+                ctx.drawImage(sprites,obstacle6.x,obstacle6.y,25,25);
+
+                ctx.fillStyle="gray";
+    		    ctx.beginPath(); 
+                ctx.moveTo(bullet1.bx,bullet1.by);
+                ctx.arc(bullet1.bx,bullet1.by,10,0,Math.PI*2,true);
+                ctx.fill();
+                ctx.closePath();
+
+                ctx.beginPath();
+                ctx.moveTo(bullet2.bx,bullet2.by);
+                ctx.arc(bullet2.bx,bullet2.by,10,0,Math.PI*2,true);
+                ctx.fill();
+                ctx.closePath();
+
+                ctx.beginPath();
+                ctx.moveTo(bullet3.bx,bullet3.by);
+                ctx.arc(bullet3.bx,bullet3.by,10,0,Math.PI*2,true);
+                ctx.fill();
+                ctx.closePath();
+
+                ctx.beginPath();
+                ctx.moveTo(bullet4.bx,bullet4.by);
+                ctx.arc(bullet4.bx,bullet4.by,10,0,Math.PI*2,true);
+                ctx.fill();
+                ctx.closePath();
+
+                ctx.beginPath();
+                ctx.moveTo(bullet5.bx,bullet5.by);
+                ctx.arc(bullet5.bx,bullet5.by,10,0,Math.PI*2,true);
+                ctx.fill();
+                ctx.closePath();
+
+                ctx.beginPath();
+                ctx.moveTo(bullet6.bx,bullet6.by);
+                ctx.arc(bullet6.bx,bullet6.by,10,0,Math.PI*2,true);
+                ctx.fill();
+                ctx.closePath();
+
+                drawDeep();
+                mazeHitTest();
+                obstacleHitTest();
+            }
+                wall.src="wall.png";
+    	        sprites.src="UFO.png";
+}
 
 
 
 
- function mazeHitTest()
- {
-
- if(mousey>sy+45)
- {
-  if(mousex>posx && mousex-posx<30)
-  {
-   alert("Gameover.Your score is:"+score);
-    lvlspeed=0;
-    clearInterval(tloop);
-  }
- }
-
- if(mousey<sy+5)
- {
-   if(mousex>posx && mousex-posx<30)
-  {
-    alert("Gameover.Your score is:"+score);
-    lvlspeed=0;
-    clearInterval(tloop);
-  }
- }
-
- if(posx-mousex<5 && posx-mousex>=0)
- {
-   if( mousey>sy+45 || mousey<sy+5)
-  {
-    alert("Gameover.Your score is:"+score);
-    lvlspeed=0;
-    clearInterval(tloop);
-  }
-
- }
-  if(mousey>sy1+45)
- {
-  if(mousex>posx1 && mousex-posx1<30)
-  {
-    alert("Gameover.Your score is:"+score);
-    lvlspeed=0;
-    clearInterval(tloop);
-  }
- }
-
- if(mousey<sy1+5)
- {
-   if(mousex>posx1 && mousex-posx1<30)
-  {
-    alert("Gameover.Your score is:"+score);
-    lvlspeed=0;
-    clearInterval(tloop);
-  }
- }
-
- if(posx1-mousex<5 && posx1-mousex>=0)
- {
-   if( mousey>sy1+45 || mousey<sy1+5)
-  {
-    alert("Gameover.Your score is:"+score);
-    lvlspeed=0;
-    clearInterval(tloop);
-  }
-
- }
+function gameover()
+{
+	alert("Game Over");
+	clearInterval(wloop);
+}
 
 
- if(mousey>sy2+45)
- {
-  if(mousex>posx2 && mousex-posx2<30)
-  {
-    alert("Gameover.Your score is:"+score);
-    lvlspeed=0;
-    clearInterval(tloop);
-  }
- }
-
- if(mousey<sy2+5)
- {
-   if(mousex>posx2 && mousex-posx2<30)
-  {
-    alert("Gameover.Your score is:"+score);
-    lvlspeed=0;
-    clearInterval(tloop);
-  }
- }
-
- if(posx2-mousex<5 && posx2-mousex>=0)
- {
-   if( mousey>sy2+45 || mousey<sy2+5)
-  {
-    alert("Gameover.Your score is:"+score);
-    lvlspeed=0;
-    clearInterval(tloop);
-  }
-
- }
-
- if(mousey>sy3+45)
- {
-  if(mousex>posx3 && mousex-posx3<30)
-  {
-    alert("Gameover.Your score is:"+score);
-    lvlspeed=0;
-    clearInterval(tloop);
-  }
- }
-
- if(mousey<sy3+5)
- {
-   if(mousex>posx3 && mousex-posx3<30)
-  {
-    alert("Gameover.Your score is:"+score);
-    lvlspeed=0;
-    clearInterval(tloop);
-  }
- }
-
- if(posx3-mousex<5 && posx3-mousex>=0)
- {
-   if( mousey>sy3+45 || mousey<sy3+5)
-  {
-    alert("Gameover.Your score is:"+score);
-    lvlspeed=0;
-    clearInterval(tloop);
-  }
-
- }
-
- if(mousey>sy4+45)
- {
-  if(mousex>posx4 && mousex-posx4<30)
-  {
-    alert("Gameover.Your score is:"+score);
-    lvlspeed=0;
-    clearInterval(tloop);
-  }
- }
-
- if(mousey<sy4+5)
- {
-   if(mousex>posx4 && mousex-posx4<30)
-  {
-    alert("Gameover.Your score is:"+score);
-    lvlspeed=0;
-    clearInterval(tloop);
-  }
- }
-
- if(posx4-mousex<5 && posx4-mousex>=0)
- {
-   if( mousey>sy4+45 || mousey<sy4+5)
-  {
-    alert("Gameover.Your score is:"+score);
-    lvlspeed=0;
-    clearInterval(tloop);
-  }
-
- }
-
- if(mousey>sy5+45)
- {
-  if(mousex>posx5 && mousex-posx5<30)
-  {
-    alert("Gameover.Your score is:"+score);
-    lvlspeed=0;
-    clearInterval(tloop);
-  }
- }
-
- if(mousey<sy5+5)
- {
-   if(mousex>posx5 && mousex-posx5<30)
-  {
-    alert("Gameover.Your score is:"+score);
-    lvlspeed=0;
-    clearInterval(tloop);
-  }
- }
-
- if(posx5-mousex<5 && posx5-mousex>=0)
- {
-   if( mousey>sy5+45 || mousey<sy5+5)
-  {
-    alert("Gameover.Your score is:"+score);
-    lvlspeed=0;
-    clearInterval(tloop);
-  }
-
- }
+//Function calls
+initWall();
+initObstacle();
+initBullet();
+setup();
 
 
- if(mousey>sy6+45)
- {
-  if(mousex>posx6 && mousex-posx6<30)
-  {
-    alert("Gameover.Your score is:"+score);
-    lvlspeed=0;
-    clearInterval(tloop);
-  }
- }
 
- if(mousey<sy6+5)
- {
-   if(mousex>posx6 && mousex-posx6<30)
-  {
-    alert("Gameover.Your score is:"+score);
-    lvlspeed=0;
-    clearInterval(tloop);
-  }
- }
 
- if(posx6-mousex<5 && posx6-mousex>=0)
- {
-   if( mousey>sy6+45 || mousey<sy6+5)
-  {
-    alert("Gameover.Your score is:"+score);
-    lvlspeed=0;
-    clearInterval(tloop);
-  }
+    
 
- }
- }
+
+
+
 
